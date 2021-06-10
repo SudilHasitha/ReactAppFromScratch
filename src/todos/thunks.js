@@ -1,4 +1,4 @@
-import {removeTodo,createTodo,loadTodosInProgress,loadTodosInFailure,loadTodosInSuccess,} from './actions';
+import {createTodo,removeTodo,loadTodosInProgress,loadTodosInFailure,loadTodosInSuccess,markTodoAsCompleted} from './actions';
 
 // dispatch - use to dispatch other redux actions 
 // getstate - get access to the current state of the redux store
@@ -37,14 +37,26 @@ export const addTodoRequest = text => async dispatch => {
 export const removeTodoRequest = id => async dispatch => {
     try {
         const response = await fetch(`http://localhost:8080/todos/${id}`,{
-            method:'DELETE'
+            method:'delete'
         });
-        const removeTodo = await response.json();
-        dispatch(removeTodo(removeTodo));
+        const removeTodoact = await response.json();
+        dispatch(removeTodo(removeTodoact));
     } catch (error) {
         dispatch(displayAlert(error))
     }
 };
+
+export const markTodoAsCompletedRequest = id => async dispatch =>{
+    try {
+        const response = await fetch(`http://localhost:8080/todos/${id}/completed`,{
+            method:'post'
+        });
+        const updatedTodo = await response.json();
+        dispatch(markTodoAsCompleted(updatedTodo));
+    } catch (error) {
+        dispatch(displayAlert(error))
+    }
+}
 
 export const displayAlert = text => () => {
     alert(text);
