@@ -3,15 +3,15 @@ import { todos } from "./reducers";
 export const CREATE_TODO = 'CREATE_TODO';
 
 // there are action creaters
-export const createTodo = text => ({
+export const createTodo = todo => ({
     type: CREATE_TODO,
-    payload: {text},
+    payload: {todo},
 });
 
 export const REMOVE_TODO = 'REMOVE_TODO';
-export const removeTodo = text => ({
+export const removeTodo = todo => ({
     type: REMOVE_TODO,
-    payload: {text},
+    payload: {todo},
 });
 
 export const MARK_TODO_AS_COMPLETED = 'MARK_TODO_AS_COMPLETED';

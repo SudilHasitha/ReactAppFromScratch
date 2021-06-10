@@ -2,8 +2,8 @@ import React, {useEffect} from 'react'; // useEffect is a react hook use to star
 import {connect} from 'react-redux';
 import NewTodoForm from './NewTodoForm';
 import TodoListItem from './TodoListItem';
-import {removeTodo,markTodoAsCompleted} from './actions';
-import {loadTodos} from './thunks';
+import {markTodoAsCompleted} from './actions';
+import {loadTodos,removeTodoRequest} from './thunks';
 import {displayAlert} from './thunks';
 import './TodoList.css';
 import { isLoading } from './reducers';
@@ -30,7 +30,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
     startLoadingTodos: () => dispatch(loadTodos()),
-    onRemovePressed: text => dispatch(removeTodo(text)),
+    onRemovePressed: id => dispatch(removeTodoRequest(id)),
     onCompletedPressed: text => dispatch(markTodoAsCompleted(text)),
     onDisplayAlertClicked: text => dispatch(displayAlert(text)),
 });
